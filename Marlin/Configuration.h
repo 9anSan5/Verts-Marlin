@@ -81,7 +81,7 @@
 //-------------------------------
 //GT2560 Boards - vscode: default_envs = mega2560 in platformio.ini
 
-//#define GTA10       // A10 & Variants
+#define GTA10       // A10 & Variants
 //#define GTA10M      // A10M & Variants
 //#define GTA10C      // A10C & Variants
 //#define GTA10T      // A10T & Variants
@@ -208,14 +208,14 @@
 
 //(Probe Mod) enable 1 (Mod) probe type none = manual (stock) - No GTM32 probe support yet
 
-//#define TOUCHPROBE  // Enable Touch Type Probe (Bltouch / 3Dtouch)
+#define TOUCHPROBE  // Enable Touch Type Probe (Bltouch / 3Dtouch)
 //#define FMP         // Enable Fixed Mounted Type Probe (Capacitive / Inductive)
 //#define PINDA       // Enable Pinda Type Probe
 
 //Probe settings
 
-//#define HEATERACCURACY   // Disable heaters while probing - May effect accuracy +-
-//#define HALFSPEED        // Reduce probing speed by 50% = 120 - May effect accuracy +-
+#define HEATERACCURACY   // Disable heaters while probing - May effect accuracy +-
+#define HALFSPEED        // Reduce probing speed by 50% = 120 - May effect accuracy +-
 //#define DOUBLESPEED      // Raise probing speed by 100% = 480 - May effect accuracy +-
 
 //(Multi Extruder Mods) These can be added to any model assuming you added the hardware to make use of it.
@@ -240,7 +240,7 @@
 //#define TB6560     // Enable TB6560  all drivers
 //#define TB6600     // Enable TB6600  all drivers
 
-//#define TMC2208S   // Enable TMC2208 Standalone all drivers
+#define TMC2208S   // Enable TMC2208 Standalone all drivers
 //#define TMC2209S   // Enable TMC2209 Standalone all drivers
 //#define TMC2130S   // Enable TMC2130 Standalone all drivers
 //#define TMC2160S   // Enable TMC2160 Standalone all drivers
@@ -304,19 +304,19 @@
 //Optional features
 
 //#define PLR              // Enabled power loss resume - Only functions from SDcard
-//#define RUNOUT           // Enable filament runout sensor - Only If you have them and want to use them
-//#define BEDCLIPS         // Enable to avoid bed clips (manual or probe) - Only If you have them and want to use them
+#define RUNOUT           // Enable filament runout sensor - Only If you have them and want to use them
+#define BEDCLIPS         // Enable to avoid bed clips (manual or probe) - Only If you have them and want to use them
 //#define CASELIGHT        // Enable case light menu if board has led header.
 //#define LINADV           // Enable linear advance.
-//#define FANSCALING       // Enabled PID FAN SCALING
-//#define EXTRUSIONSCALING // Enabled PID EXTRUSION SCALING
-//#define ACTIONCOMMANDS   // Enable ACTION COMMANDS for use with octoprint
+#define FANSCALING       // Enabled PID FAN SCALING
+#define EXTRUSIONSCALING // Enabled PID EXTRUSION SCALING
+#define ACTIONCOMMANDS   // Enable ACTION COMMANDS for use with octoprint
 //#define MESHVALIDATE     // Enable G26 mesh validation does not work well in my testing
 
 //Disable to save resources on hardware you dont use
 
 //#define NOSCREEN         // Disable the screen - Save alot of resources good for octoprint users
-//#define NOSDCARD         // Disable the sdcard slot - Save alot of resources good for octoprint users 
+#define NOSDCARD         // Disable the sdcard slot - Save alot of resources good for octoprint users 
 
 //Used to switch the default board of the model selected in step 1
 
@@ -498,7 +498,7 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "3D Printer" 
+#define CUSTOM_MACHINE_NAME "Geeetech A10" 
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
@@ -904,6 +904,10 @@
     #define  DEFAULT_Kp 1
     #define  DEFAULT_Ki 1
     #define  DEFAULT_Kd 1
+  #elif ENABLED (GTA10)
+    #define DEFAULT_Kp 46.45
+    #define DEFAULT_Ki 6.91
+    #define DEFAULT_Kd 78.00
   #else // A10 & A20
     #define  DEFAULT_Kp 33.29
     #define  DEFAULT_Ki 3.83
@@ -1446,8 +1450,8 @@
  */
 #if DISABLED (NEWMODEL)
 #if DISABLED (MULTIEXTRUDER) && DISABLED (BEAR) && DISABLED (BEAR_TURBO)
-  #define DEFAULT_AXIS_STEPS_PER_UNIT  { 80, 80, 400, 95 }  // ungeared extruder found on a10/a20/a30/i3pro
-  //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 95 } 
+  #define DEFAULT_AXIS_STEPS_PER_UNIT  { 80.25, 80.52, 406.04, 99.87 }  // ungeared extruder found on a10/a20/a30/i3pro
+  //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 95 }
   //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 2560, 95 } // M8 Z rod steps 2560 found on old I3pro
 #elif ENABLED (MULTIEXTRUDER) && DISABLED (BEAR) && DISABLED (BEAR_TURBO)
   #define DEFAULT_AXIS_STEPS_PER_UNIT  { 80, 80, 400, 430 } // geared extruder found on M & T variants
@@ -1731,7 +1735,7 @@
  *     O-- FRONT --+
  */
 #if DISABLED (MULTIEXTRUDER) && ANY(TOUCHPROBE, FMP) && ANY (GTA10, GTA20)
-  #define NOZZLE_TO_PROBE_OFFSET { -38, 5, 0 } // Nozzle To Probe offset XYZ A10/A20 - this is what it is on my test machines yours could differ 
+  #define NOZZLE_TO_PROBE_OFFSET { -38, 2, -1.25 } // Nozzle To Probe offset XYZ A10/A20 - this is what it is on my test machines yours could differ
 #elif ENABLED (MULTIEXTRUDER) && ANY(TOUCHPROBE, FMP) && ANY (GTA10, GTA20)
   #define NOZZLE_TO_PROBE_OFFSET { -40, 0, 0 }  // Nozzle To Probe offset XYZ A10M+T/A20M+T - this is what it is on my test machines yours could differ
 #elif ANY (BEAR, BEAR_TURBO) && ENABLED (TOUCHPROBE)
@@ -2487,7 +2491,7 @@
 
 // Preheat Constants
 #define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND  200
+#define PREHEAT_1_TEMP_HOTEND  210
 #define PREHEAT_1_TEMP_BED      60
 #define PREHEAT_1_FAN_SPEED      0 // Value from 0 to 255
 
@@ -2671,7 +2675,7 @@
  *
  * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'de':'German', 'el':'Greek', 'el_gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'hu':'Hungarian', 'it':'Italian', 'jp_kana':'Japanese', 'ko_KR':'Korean (South Korea)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt_br':'Portuguese (Brazilian)', 'ro':'Romanian', 'ru':'Russian', 'sk':'Slovak', 'tr':'Turkish', 'uk':'Ukrainian', 'vi':'Vietnamese', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Traditional)', 'test':'TEST' }
  */
-#define LCD_LANGUAGE en
+#define LCD_LANGUAGE it
 
 /**
  * LCD Character Set
